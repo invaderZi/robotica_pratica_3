@@ -10,19 +10,19 @@ def generate_launch_description():
     package_name = 'robotics_class'
     pkg_share_dir = get_package_share_directory(package_name)
     
-    # Configurações
+    
     params_file = os.path.join(pkg_share_dir, 'params', 'default.yaml')
     bt_xml_file = os.path.join(pkg_share_dir, 'behavior_trees', 'my_nav_to_pose_bt.xml')
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
 
-    # Declaração de argumentos
+    # argumentos
     declare_use_sim_time_cmd = DeclareLaunchArgument(
         'use_sim_time',
         default_value='true',
         description='Use simulation time'
     )
 
-    # Nó do Behavior Tree Navigator
+    # Behavior Tree Navigator
     bt_navigator_cmd = Node(
         package='nav2_bt_navigator',
         executable='bt_navigator',
@@ -33,7 +33,7 @@ def generate_launch_description():
                      'default_bt_xml_filename': bt_xml_file}]
     )
 
-    # Nó do Planner
+    # Planner
     planner_cmd = Node(
         package='nav2_planner',
         executable='planner_server',
@@ -43,7 +43,7 @@ def generate_launch_description():
                     {'use_sim_time': use_sim_time}]
     )
 
-    # Nó do Controller
+    # Controller
     controller_cmd = Node(
         package='nav2_controller',
         executable='controller_server',
@@ -54,7 +54,7 @@ def generate_launch_description():
         remappings=[('cmd_vel', '/jetauto/cmd_vel')]  # ✅ REMAPING AQUI!
     )
 
-    # Nó do Recovery
+    # Recovery
     recovery_cmd = Node(
         package='nav2_behaviors',
         executable='behavior_server',
@@ -64,7 +64,7 @@ def generate_launch_description():
                     {'use_sim_time': use_sim_time}]
     )
 
-    # Nó do Lifecycle Manager
+    # Lifecycle Manager
     lifecycle_manager_cmd = Node(
         package='nav2_lifecycle_manager',
         executable='lifecycle_manager',
