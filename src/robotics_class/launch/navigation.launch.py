@@ -51,7 +51,7 @@ def generate_launch_description():
         output='screen',
         parameters=[params_file,
                     {'use_sim_time': use_sim_time}],
-        remappings=[('cmd_vel', '/jetauto/cmd_vel')]  # ✅ REMAPING AQUI!
+        remappings=[('cmd_vel', '/jetauto/cmd_vel')]  
     )
 
     # Recovery
